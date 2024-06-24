@@ -1,7 +1,7 @@
 resource "azurerm_resource_group" "rg-staticsite" {
   provider = azurerm.cloud
-  name     = "rg-staticsite"
-  location = "eastus"
+  name     = var.rg_name
+  location = var.location
 }
 
 resource "azurerm_storage_account" "storage_account" {

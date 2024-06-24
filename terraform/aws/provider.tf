@@ -2,13 +2,13 @@ terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = ">= 5.21"
+      version = ">= 5.55"
     }
   }
   backend "s3" {
-    bucket         = "staticsite-multicloud-tf-v001"
+    bucket         = "kledson-basso-003-tf"
     key            = "terraform.tfstate"
-    dynamodb_table = "staticsite-multicloud-tf-v001"
+    dynamodb_table = "kledson-basso-003-tf"
     region         = "us-east-1"
   }
 }

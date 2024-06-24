@@ -1,5 +1,5 @@
 variable "bucket_name" {
-  default = "staticsite-multicloud-v001"
+  default = "kledson-basso-003"
 }
 
 variable "website_endpoint" {

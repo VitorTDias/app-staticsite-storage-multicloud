@@ -1,12 +1,12 @@
-name: Terraform Multicloud
+name: Terraform Pipeline
 
 on:
   push:
     branches:
-    - main
+      - main
 
 env:
-  TERRAFORM_VERSION: 1.6.2
+  TERRAFORM_VERSION: 1.8.5
 
 jobs:
 
@@ -17,7 +17,7 @@ jobs:
     steps:
 
     - name: Step 01 - Terraform Setup
-      uses: hashicorp/setup-terraform@v2
+      uses: hashicorp/setup-terraform@v3
       with:
         terraform_version: $TERRAFORM_VERSION
 
@@ -25,28 +25,27 @@ jobs:
       run : terraform --version
 
     - name: Step 03 - CheckOut GitHub Repo
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Step 04 - Authenticate with AWS
-      uses: aws-actions/configure-aws-credentials@v2
+      uses: aws-actions/configure-aws-credentials@v4
       with:
         aws-access-key-id    : ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-session-token    : ${{ secrets.AWS_SESSION_TOKEN }}
         aws-region           : us-east-1
 
     - name: Step 05 - Terraform Init
-      run : terraform -chdir=./terraform/aws init -input=false
+      run : terraform -chdir=./terraform/aws init
 
     - name: Step 06 - Terraform Validate
       run : terraform -chdir=./terraform/aws validate
 
     - name: Step 07 - Terraform Plan
-      run : terraform -chdir=./terraform/aws plan -input=false -out tfplan
-    #   run : terraform -chdir=./terraform/aws plan -input=false -destroy -out tfplan
+      run : terraform -chdir=./terraform/aws plan -out tfplan
+    #   run : terraform -chdir=./terraform/aws plan -destroy -out tfplan
 
     - name: Step 08 - Terraform Apply
-      run : terraform -chdir=./terraform/aws apply -auto-approve -input=false tfplan
+      run : terraform -chdir=./terraform/aws apply tfplan
 
     - name: Step 09 - Terraform Show
       run : terraform -chdir=./terraform/aws show
@@ -63,7 +62,7 @@ jobs:
     steps:
 
     - name: Step 01 - Terraform Setup
-      uses: hashicorp/setup-terraform@v2
+      uses: hashicorp/setup-terraform@v3
       with:
         terraform_version: $TERRAFORM_VERSION
 
@@ -71,25 +70,25 @@ jobs:
       run : terraform --version
 
     - name: Step 03 - CheckOut GitHub Repo
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Step 04 - Authenticate with Azure
-      uses: azure/login@v1
+      uses: azure/login@v2
       with:
         creds: '{"clientId":"${{ secrets.ARM_CLIENT_ID }}","clientSecret":"${{ secrets.ARM_CLIENT_SECRET }}","subscriptionId":"${{ secrets.ARM_SUBSCRIPTION_ID }}","tenantId":"${{ secrets.ARM_TENANT_ID }}"}'
 
     - name: Step 05 - Terraform Init
-      run : terraform -chdir=./terraform/azure init -input=false
+      run : terraform -chdir=./terraform/azure init
 
     - name: Step 06 - Terraform Validate
       run : terraform -chdir=./terraform/azure validate
 
     - name: Step 07 - Terraform Plan
-      run : terraform -chdir=./terraform/azure plan -input=false -out tfplan
-    #   run : terraform -chdir=./terraform/azure plan -input=false -destroy -out tfplan
+      run : terraform -chdir=./terraform/azure plan -out tfplan
+      # run : terraform -chdir=./terraform/azure plan -destroy -out tfplan
 
     - name: Step 08 - Terraform Apply
-      run : terraform -chdir=./terraform/azure apply -auto-approve -input=false tfplan
+      run : terraform -chdir=./terraform/azure apply tfplan
 
     - name: Step 09 - Terraform Show
       run : terraform -chdir=./terraform/azure show
