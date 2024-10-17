@@ -6,9 +6,9 @@ terraform {
     }
   }
   backend "s3" {
-    bucket         = "kledson-basso-003-tf"
+    bucket         = "vitor-torto-001-tf"
     key            = "terraform.tfstate"
-    dynamodb_table = "kledson-basso-003-tf"
+    dynamodb_table = "vitor-torto-001-tf"
     region         = "us-east-1"
   }
 }

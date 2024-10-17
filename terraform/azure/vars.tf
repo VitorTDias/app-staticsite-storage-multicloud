@@ -1,11 +1,11 @@
 variable "storage_account_name" {
     type    = string
-    default = "kledsonbasso003"
+    default = "vitortorto001tf"
 }
 
 variable "rg_name" {
     type    = string
-    default = "rg-kledson-basso-003"
+    default = "rg-vitor-torto-001"
 }
 
 variable "location" {
