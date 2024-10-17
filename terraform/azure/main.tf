@@ -1,4 +1,4 @@
-resource "azurerm_resource_group" "rg-staticsite" {
+resource "azurerm_resource_group" "rg-staticsite-001-vitor" {
   provider = azurerm.cloud
   name     = var.rg_name
   location = var.location
