@@ -5,7 +5,7 @@ variable "storage_account_name" {
 
 variable "rg_name" {
     type    = string
-    default = "rg-vitor-torto-001-tf"
+    default = "rg-vitor-torto-002-tf"
 }
 
 variable "location" {
