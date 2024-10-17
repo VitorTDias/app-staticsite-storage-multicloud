@@ -7,8 +7,8 @@ resource "azurerm_resource_group" "rg-vitor-torto-001-tf" {
 resource "azurerm_storage_account" "storage_account" {
   provider                 = azurerm.cloud
   name                     = var.storage_account_name
-  resource_group_name      = azurerm_resource_group.rg-staticsite.name
-  location                 = azurerm_resource_group.rg-staticsite.location
+  resource_group_name      = azurerm_resource_group.rg-vitor-torto-001-tf.name
+  location                 = azurerm_resource_group.rg-vitor-torto-001-tf.location
   account_tier             = "Standard"
   account_replication_type = "LRS"
   account_kind             = "StorageV2"
