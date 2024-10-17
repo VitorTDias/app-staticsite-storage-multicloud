@@ -1,6 +1,6 @@
 variable "storage_account_name" {
     type    = string
-    default = "vitortorto001tf"
+    default = "vitortorto002tf"
 }
 
 variable "rg_name" {
